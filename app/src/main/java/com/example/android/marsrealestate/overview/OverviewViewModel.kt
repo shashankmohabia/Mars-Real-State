@@ -45,6 +45,11 @@ class OverviewViewModel : ViewModel() {
     val response: LiveData<String>
         get() = _response
 
+    private val _property = MutableLiveData<MarsProperty>()
+
+    val property: LiveData<MarsProperty>
+        get() = _property
+
     /**
      * Call getMarsRealEstateProperties() on init so we can display status immediately.
      */
@@ -57,10 +62,13 @@ class OverviewViewModel : ViewModel() {
      */
     private fun getMarsRealEstateProperties() {
         uiScope.launch {
-            var getPropertiesDeferred = MarsApi.retrofitService.getPropertiesAsync()
+            val getPropertiesDeferred = MarsApi.retrofitService.getPropertiesAsync()
             try {
-                var listResult = getPropertiesDeferred.await()
-                _response.value = listResult.size.toString()
+                val listResult = getPropertiesDeferred.await()
+                _response.value = listResult.toString()
+                if (listResult.isNotEmpty()) {
+                    _property.value = listResult[0]
+                }
             } catch (e: Exception) {
                 _response.value = e.message
             }
