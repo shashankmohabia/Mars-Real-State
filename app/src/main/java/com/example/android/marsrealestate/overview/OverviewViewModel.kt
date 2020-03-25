@@ -33,22 +33,23 @@ import retrofit2.Response
 /**
  * The [ViewModel] that is attached to the [OverviewFragment].
  */
+
+enum class MarsApiStatus { LOADING, ERROR, DONE }
+
+
 class OverviewViewModel : ViewModel() {
 
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    // The internal MutableLiveData String that stores the most recent response
-    private val _response = MutableLiveData<String>()
+    private val _status = MutableLiveData<MarsApiStatus>()
+    val status: LiveData<MarsApiStatus>
+        get() = _status
 
-    // The external immutable LiveData for the response String
-    val response: LiveData<String>
-        get() = _response
+    private val _properties = MutableLiveData<List<MarsProperty>>()
 
-    private val _property = MutableLiveData<MarsProperty>()
-
-    val property: LiveData<MarsProperty>
-        get() = _property
+    val properties: LiveData<List<MarsProperty>>
+        get() = _properties
 
     /**
      * Call getMarsRealEstateProperties() on init so we can display status immediately.
@@ -65,12 +66,11 @@ class OverviewViewModel : ViewModel() {
             val getPropertiesDeferred = MarsApi.retrofitService.getPropertiesAsync()
             try {
                 val listResult = getPropertiesDeferred.await()
-                _response.value = listResult.toString()
-                if (listResult.isNotEmpty()) {
-                    _property.value = listResult[0]
-                }
+                _status.value = MarsApiStatus.DONE
+                _properties.value = listResult
             } catch (e: Exception) {
-                _response.value = e.message
+                _status.value = MarsApiStatus.ERROR
+                _properties.value = ArrayList()
             }
         }
     }
