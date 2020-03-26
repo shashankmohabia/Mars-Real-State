@@ -59,7 +59,6 @@ class OverviewFragment : Fragment() {
 
         setHasOptionsMenu(true)
         viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner, Observer {
-            Toast.makeText(this.activity, "fniseubfsikjnc", Toast.LENGTH_SHORT).show()
             if (null != it) {
                 this.findNavController().navigate(
                         OverviewFragmentDirections.actionShowDetail(it))
