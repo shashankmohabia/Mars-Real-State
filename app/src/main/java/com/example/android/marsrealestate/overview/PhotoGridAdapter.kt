@@ -1,20 +1,3 @@
-/*
- * Copyright 2019, The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
 package com.example.android.marsrealestate.overview
 
 import android.view.LayoutInflater
@@ -25,16 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android.marsrealestate.databinding.GridViewItemBinding
 import com.example.android.marsrealestate.network.MarsProperty
 
-class PhotoGridAdapter(val clickListener: OnClickListener) : ListAdapter<MarsProperty, PhotoGridViewHolder>(DiffCallback) {
+class PhotoGridAdapter(private val clickListener: OnClickListener) : ListAdapter<MarsProperty, PhotoGridViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoGridViewHolder {
         return PhotoGridViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: PhotoGridViewHolder, position: Int) {
-        holder.itemView.setOnClickListener {
-            clickListener.onClick(getItem(position))
-        }
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), clickListener)
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<MarsProperty>() {
@@ -55,14 +35,15 @@ class PhotoGridViewHolder private constructor(var binding: GridViewItemBinding) 
         }
     }
 
-    fun bind(marsProperty: MarsProperty) {
+    fun bind(marsProperty: MarsProperty, clickListener: OnClickListener) {
         binding.property = marsProperty
+        binding.clickListener = clickListener
         binding.executePendingBindings()
     }
 }
 
-class OnClickListener(val clickListener: (marsProperty:MarsProperty) -> Unit) {
-    fun onClick(marsProperty:MarsProperty) = clickListener(marsProperty)
+class OnClickListener(val clickListener: (marsProperty: MarsProperty) -> Unit) {
+    fun onClick(marsProperty: MarsProperty) = clickListener(marsProperty)
 }
 
 
