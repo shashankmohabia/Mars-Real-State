@@ -52,7 +52,7 @@ class OverviewFragment : Fragment() {
         // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
 
-        binding.photosGrid.adapter = PhotoGridAdapter()
+        binding.photosGrid.adapter = PhotoGridAdapter(OnClickListener { viewModel.navigateToSelectedProperty })
 
         setHasOptionsMenu(true)
         return binding.root

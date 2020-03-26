@@ -25,12 +25,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android.marsrealestate.databinding.GridViewItemBinding
 import com.example.android.marsrealestate.network.MarsProperty
 
-class PhotoGridAdapter : ListAdapter<MarsProperty, PhotoGridViewHolder>(DiffCallback) {
+class PhotoGridAdapter(val clickListener: OnClickListener) : ListAdapter<MarsProperty, PhotoGridViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoGridViewHolder {
         return PhotoGridViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: PhotoGridViewHolder, position: Int) {
+        holder.itemView.setOnClickListener {
+            clickListener.onClick(getItem(position))
+        }
         holder.bind(getItem(position))
     }
 
@@ -56,6 +59,10 @@ class PhotoGridViewHolder private constructor(var binding: GridViewItemBinding) 
         binding.property = marsProperty
         binding.executePendingBindings()
     }
+}
+
+class OnClickListener(val clickListener: (marsProperty:MarsProperty) -> Unit) {
+    fun onClick(marsProperty:MarsProperty) = clickListener(marsProperty)
 }
 
 
