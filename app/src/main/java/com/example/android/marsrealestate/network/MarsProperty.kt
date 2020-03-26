@@ -23,5 +23,7 @@ class MarsProperty(
         val id: String,
         @Json(name = "img_src") val imgSrc: String,
         val price: Double,
-        val type: String
-)
+        private val type: String) {
+    val isRental
+        get() = type == "rent"
+}
