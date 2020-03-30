@@ -14,7 +14,7 @@
 
         <variable
             name="clickListener"
-            type="com.example.android.marsrealestate.overview.OnClickListener" />
+            type="com.example.android.marsrealestate.ui.overview.OnClickListener" />
     </data>
 
     <FrameLayout

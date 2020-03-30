@@ -1,4 +1,4 @@
-package com.example.android.marsrealestate.detail
+package com.example.android.marsrealestate.ui.detail
 
 import android.app.Application
 import androidx.lifecycle.*

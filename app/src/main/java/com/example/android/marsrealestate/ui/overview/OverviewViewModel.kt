@@ -1,4 +1,4 @@
-package com.example.android.marsrealestate.overview
+package com.example.android.marsrealestate.ui.overview
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

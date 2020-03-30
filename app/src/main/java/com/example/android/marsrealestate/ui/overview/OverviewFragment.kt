@@ -1,4 +1,4 @@
-package com.example.android.marsrealestate.overview
+package com.example.android.marsrealestate.ui.overview
 
 import android.os.Bundle
 import android.view.*
