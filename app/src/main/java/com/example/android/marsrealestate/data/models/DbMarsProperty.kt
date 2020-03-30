@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import com.example.android.marsrealestate.utils.contants.DB_TABLE_NAME
 
 @Entity(tableName = DB_TABLE_NAME)
-data class DbProperty(
+data class DbMarsProperty(
         @PrimaryKey
         val id: String,
 
@@ -20,7 +20,7 @@ data class DbProperty(
         val type: String
 )
 
-fun List<DbProperty>.toDomainModel(): List<Property> {
+fun List<DbMarsProperty>.toDomainModel(): List<Property> {
     return map {
         Property(
                 id = it.id,

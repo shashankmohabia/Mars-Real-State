@@ -3,12 +3,12 @@ package com.example.android.marsrealestate.ui.detail
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.android.marsrealestate.R
-import com.example.android.marsrealestate.network.MarsProperty
+import com.example.android.marsrealestate.data.models.Property
 
-class DetailViewModel(marsProperty: MarsProperty, app: Application) : AndroidViewModel(app) {
+class DetailViewModel(property: Property, app: Application) : AndroidViewModel(app) {
 
-    private val _selectedProperty = MutableLiveData<MarsProperty>()
-    val selectedProperty: LiveData<MarsProperty>
+    private val _selectedProperty = MutableLiveData<Property>()
+    val selectedProperty: LiveData<Property>
         get() = _selectedProperty
 
     //move these methods to use strings formattors
@@ -31,6 +31,6 @@ class DetailViewModel(marsProperty: MarsProperty, app: Application) : AndroidVie
     }
 
     init {
-        _selectedProperty.value = marsProperty
+        _selectedProperty.value = property
     }
 }

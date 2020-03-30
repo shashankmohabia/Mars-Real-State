@@ -2,20 +2,22 @@ package com.example.android.marsrealestate.ui.overview
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.android.marsrealestate.R
 import com.example.android.marsrealestate.databinding.FragmentOverviewBinding
-import com.example.android.marsrealestate.network.MarsApiFilter
 
 class OverviewFragment : Fragment() {
 
     private lateinit var binding: FragmentOverviewBinding
 
     private val overviewViewModel: OverviewViewModel by lazy {
-        ViewModelProvider(this).get(OverviewViewModel::class.java)
+        val application = requireNotNull(activity).application
+        val viewModelFactory = OverviewViewModelFactory(application)
+        ViewModelProvider(this, viewModelFactory).get(OverviewViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -56,11 +58,12 @@ class OverviewFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         overviewViewModel.updateFilter(
                 when (item.itemId) {
-                    R.id.show_rent_menu -> MarsApiFilter.SHOW_RENT
-                    R.id.show_buy_menu -> MarsApiFilter.SHOW_BUY
-                    else -> MarsApiFilter.SHOW_ALL
+                    R.id.show_rent_menu -> PropertyTypeFilter.SHOW_RENT
+                    R.id.show_buy_menu -> PropertyTypeFilter.SHOW_BUY
+                    else -> PropertyTypeFilter.SHOW_ALL
                 }
         )
+        Toast.makeText(activity, overviewViewModel.properties.value?.size.toString(), Toast.LENGTH_SHORT).show()
         return true
     }
 }

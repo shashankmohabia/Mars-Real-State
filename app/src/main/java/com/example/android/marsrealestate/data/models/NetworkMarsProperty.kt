@@ -15,10 +15,9 @@
  *
  */
 
-package com.example.android.marsrealestate.network
+package com.example.android.marsrealestate.data.models
 
 import android.os.Parcelable
-import com.example.android.marsrealestate.data.models.DbProperty
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
@@ -32,9 +31,9 @@ class MarsProperty(
         get() = type == "rent"
 }
 
-fun List<MarsProperty>.toDbModel(): List<DbProperty> {
+fun List<MarsProperty>.toDbModel(): List<DbMarsProperty> {
     return map {
-        DbProperty(
+        DbMarsProperty(
                 id = it.id,
                 imgSrc = it.imgSrc,
                 price = it.price,

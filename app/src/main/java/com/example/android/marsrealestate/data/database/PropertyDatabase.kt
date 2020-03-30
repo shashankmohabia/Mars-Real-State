@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.android.marsrealestate.data.models.DbProperty
+import com.example.android.marsrealestate.data.models.DbMarsProperty
 import com.example.android.marsrealestate.utils.contants.DB_NAME
 
-@Database(entities = [DbProperty::class], version = 1, exportSchema = false)
+@Database(entities = [DbMarsProperty::class], version = 1, exportSchema = false)
 abstract class PropertyDatabase : RoomDatabase() {
 
     abstract val dao: DbDao
