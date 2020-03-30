@@ -5,15 +5,13 @@ import androidx.lifecycle.*
 import com.example.android.marsrealestate.R
 import com.example.android.marsrealestate.network.MarsProperty
 
-/**
- * The [ViewModel] that is associated with the [DetailFragment].
- */
-class DetailViewModel(@Suppress("UNUSED_PARAMETER") marsProperty: MarsProperty, app: Application) : AndroidViewModel(app) {
+class DetailViewModel(marsProperty: MarsProperty, app: Application) : AndroidViewModel(app) {
 
     private val _selectedProperty = MutableLiveData<MarsProperty>()
     val selectedProperty: LiveData<MarsProperty>
         get() = _selectedProperty
 
+    //move these methods to use strings formattors
     val displayPropertyType = Transformations.map(selectedProperty) {
         app.applicationContext.getString(R.string.display_type,
                 app.applicationContext.getString(
@@ -23,6 +21,7 @@ class DetailViewModel(@Suppress("UNUSED_PARAMETER") marsProperty: MarsProperty, 
                         }))
     }
 
+    //move these methods to use strings formattors
     val displayPropertyPrice = Transformations.map(selectedProperty) {
         app.applicationContext.getString(
                 when (it.isRental) {

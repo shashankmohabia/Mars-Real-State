@@ -9,6 +9,7 @@ import com.example.android.marsrealestate.databinding.GridViewItemBinding
 import com.example.android.marsrealestate.network.MarsProperty
 
 class PhotoGridAdapter(private val clickListener: OnClickListener) : ListAdapter<MarsProperty, PhotoGridViewHolder>(DiffCallback) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoGridViewHolder {
         return PhotoGridViewHolder.from(parent)
     }

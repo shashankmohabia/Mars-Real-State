@@ -1,4 +1,3 @@
-
 package com.example.android.marsrealestate.overview
 
 import androidx.lifecycle.LiveData
@@ -11,12 +10,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-/**
- * The [ViewModel] that is attached to the [OverviewFragment].
- */
 
 enum class MarsApiStatus { LOADING, ERROR, DONE }
-
 
 class OverviewViewModel : ViewModel() {
 
@@ -28,7 +23,6 @@ class OverviewViewModel : ViewModel() {
         get() = _status
 
     private val _properties = MutableLiveData<List<MarsProperty>>()
-
     val properties: LiveData<List<MarsProperty>>
         get() = _properties
 
@@ -37,16 +31,10 @@ class OverviewViewModel : ViewModel() {
         get() = _navigateToSelectedProperty
 
 
-    /**
-     * Call getMarsRealEstateProperties() on init so we can display status immediately.
-     */
     init {
         getMarsRealEstateProperties(MarsApiFilter.SHOW_ALL)
     }
 
-    /**
-     * Sets the value of the status LiveData to the Mars API status.
-     */
     private fun getMarsRealEstateProperties(filter: MarsApiFilter) {
         uiScope.launch {
             val getPropertiesDeferred = MarsApi.retrofitService.getPropertiesAsync(filter.value)
