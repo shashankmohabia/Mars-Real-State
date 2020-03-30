@@ -1,9 +1,8 @@
-package com.example.android.marsrealestate.data.model
+package com.example.android.marsrealestate.data.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.android.marsrealestate.network.MarsProperty
 import com.example.android.marsrealestate.utils.contants.DB_TABLE_NAME
 
 @Entity(tableName = DB_TABLE_NAME)

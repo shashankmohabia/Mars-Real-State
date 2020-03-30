@@ -18,7 +18,7 @@
 package com.example.android.marsrealestate.network
 
 import android.os.Parcelable
-import com.example.android.marsrealestate.data.model.DbProperty
+import com.example.android.marsrealestate.data.models.DbProperty
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 

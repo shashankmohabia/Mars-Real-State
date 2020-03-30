@@ -1,11 +1,11 @@
-package com.example.android.marsrealestate.data
+package com.example.android.marsrealestate.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.android.marsrealestate.data.model.DbProperty
+import com.example.android.marsrealestate.data.models.DbProperty
 import com.example.android.marsrealestate.utils.contants.DB_TABLE_NAME
 
 @Dao
