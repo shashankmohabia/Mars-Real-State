@@ -9,12 +9,17 @@ import com.example.android.marsrealestate.repository.PropertyRepository
 import retrofit2.HttpException
 
 class RefreshDBWorker(private val context: Context, params: WorkerParameters) : CoroutineWorker(context, params) {
+
+    companion object {
+        const val WORK_NAME = "com.example.android.marsrealestate.data.work.RefreshDBWorker"
+    }
+
     override suspend fun doWork(): Result {
         val db = PropertyDatabase.getInstance(context)
         val repository = PropertyRepository(db)
         try {
-            Log.i("jaipur", "started")
             repository.refreshDatabase()
+            Log.i("jaipur", "work done")
         } catch (e: HttpException) {
             return Result.retry()
         }
