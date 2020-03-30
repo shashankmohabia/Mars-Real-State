@@ -46,6 +46,7 @@ class OverviewFragment : Fragment() {
                 this.findNavController().navigate(
                         OverviewFragmentDirections.actionShowDetail(it))
                 overviewViewModel.displayPropertyDetailsComplete()
+                Toast.makeText(activity, overviewViewModel.properties.value?.value?.size.toString(), Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -63,7 +64,6 @@ class OverviewFragment : Fragment() {
                     else -> PropertyTypeFilter.SHOW_ALL
                 }
         )
-        Toast.makeText(activity, overviewViewModel.properties.value?.size.toString(), Toast.LENGTH_SHORT).show()
         return true
     }
 }

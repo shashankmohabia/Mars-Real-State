@@ -21,7 +21,9 @@ class OverviewViewModel(application: Application) : ViewModel() {
     private val uiScope = CoroutineScope(viewModelJob + Dispatchers.Main)
     private val repository = PropertyRepository(PropertyDatabase.getInstance(application))
 
-    var properties = repository.allProperties
+    private val _properties = MutableLiveData<LiveData<List<Property>>>()
+    val properties: LiveData<LiveData<List<Property>>>
+        get() = _properties
 
     private val _status = MutableLiveData<MarsApiStatus>()
     val status: LiveData<MarsApiStatus>
@@ -33,6 +35,7 @@ class OverviewViewModel(application: Application) : ViewModel() {
 
 
     init {
+        _properties.value = repository.allProperties
         refreshData()
     }
 
@@ -42,7 +45,7 @@ class OverviewViewModel(application: Application) : ViewModel() {
                 repository.refreshDatabase()
                 _status.value = MarsApiStatus.DONE
             } catch (e: Exception) {
-                if (properties.value.isNullOrEmpty()) {
+                if (properties.value?.value.isNullOrEmpty()) {
                     _status.value = MarsApiStatus.ERROR
                 }
             }
@@ -50,7 +53,7 @@ class OverviewViewModel(application: Application) : ViewModel() {
     }
 
     fun updateFilter(filter: PropertyTypeFilter) {
-        properties = when (filter) {
+        _properties.value = when (filter) {
             PropertyTypeFilter.SHOW_ALL -> repository.allProperties
             PropertyTypeFilter.SHOW_BUY -> repository.buyableProperties
             PropertyTypeFilter.SHOW_RENT -> repository.rentalProperties
