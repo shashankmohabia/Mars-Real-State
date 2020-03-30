@@ -2,9 +2,7 @@ package com.example.android.marsrealestate
 
 import android.app.Application
 import android.util.Log
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
+import androidx.work.*
 import com.example.android.marsrealestate.data.work.RefreshDBWorker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,15 +20,23 @@ class MarsRealEstateApplication : Application() {
 
     private fun delayedInit() {
         applicationScope.launch {
-            Log.i("jaipur", "work started")
             setupRecurringWork()
         }
     }
 
     private fun setupRecurringWork() {
-        val repeatingRequest =
-                PeriodicWorkRequestBuilder<RefreshDBWorker>(15, TimeUnit.MINUTES).build()
 
+        val constraints = Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.UNMETERED)
+                .setRequiresBatteryNotLow(true)
+                .build()
+
+        val repeatingRequest =
+                PeriodicWorkRequestBuilder<RefreshDBWorker>(1, TimeUnit.DAYS)
+                        .setConstraints(constraints)
+                        .build()
+
+        Log.i("jaipur", "work scheduled")
         WorkManager.getInstance().enqueueUniquePeriodicWork(
                 RefreshDBWorker.WORK_NAME,
                 ExistingPeriodicWorkPolicy.KEEP,

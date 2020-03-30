@@ -15,12 +15,14 @@ class RefreshDBWorker(private val context: Context, params: WorkerParameters) : 
     }
 
     override suspend fun doWork(): Result {
+        Log.i("jaipur", "work started")
         val db = PropertyDatabase.getInstance(context)
         val repository = PropertyRepository(db)
         try {
             repository.refreshDatabase()
             Log.i("jaipur", "work done")
         } catch (e: HttpException) {
+            Log.i("jaipur", "work gave error")
             return Result.retry()
         }
         return Result.success()

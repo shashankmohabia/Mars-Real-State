@@ -36,7 +36,7 @@ class OverviewViewModel(application: Application) : ViewModel() {
 
     init {
         _properties.value = repository.allProperties
-        refreshData()
+        //refreshData()
     }
 
     private fun refreshData() {
