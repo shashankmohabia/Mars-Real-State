@@ -18,6 +18,7 @@
 package com.example.android.marsrealestate.network
 
 import android.os.Parcelable
+import com.example.android.marsrealestate.data.model.DbProperty
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
@@ -26,7 +27,18 @@ class MarsProperty(
         val id: String,
         @Json(name = "img_src") val imgSrc: String,
         val price: Double,
-        private val type: String) : Parcelable {
+        val type: String) : Parcelable {
     val isRental
         get() = type == "rent"
+}
+
+fun List<MarsProperty>.toDbModel(): List<DbProperty> {
+    return map {
+        DbProperty(
+                id = it.id,
+                imgSrc = it.imgSrc,
+                price = it.price,
+                type = it.type
+        )
+    }
 }
