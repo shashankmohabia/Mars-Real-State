@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.android.marsrealestate.R
-import com.example.android.marsrealestate.data.models.Property
+import com.example.android.marsrealestate.data.models.MarsProperty
 import com.example.android.marsrealestate.ui.overview.MarsApiStatus
 import com.example.android.marsrealestate.ui.overview.PhotoGridAdapter
 
@@ -29,7 +29,7 @@ fun bindImage(imageView: ImageView, url: String?) {
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView,
-                     data: List<Property>?) {
+                     data: List<MarsProperty>?) {
     val adapter = recyclerView.adapter as PhotoGridAdapter
     adapter.submitList(data)
 }

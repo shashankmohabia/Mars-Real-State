@@ -20,9 +20,9 @@ data class DbMarsProperty(
         val type: String
 )
 
-fun List<DbMarsProperty>.toDomainModel(): List<Property> {
+fun List<DbMarsProperty>.toDomainModel(): List<MarsProperty> {
     return map {
-        Property(
+        MarsProperty(
                 id = it.id,
                 imgSrc = it.imgSrc,
                 price = it.price,

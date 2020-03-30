@@ -1,6 +1,6 @@
 package com.example.android.marsrealestate.data.network
 
-import com.example.android.marsrealestate.data.models.MarsProperty
+import com.example.android.marsrealestate.data.models.NetworkMarsProperty
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -24,7 +24,7 @@ private val retrofit = Retrofit.Builder()
 interface MarsApiService {
 
     @GET("realestate")
-    fun getPropertiesAsync(): Deferred<List<MarsProperty>>
+    fun getPropertiesAsync(): Deferred<List<NetworkMarsProperty>>
 }
 
 object MarsApi {

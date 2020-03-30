@@ -22,7 +22,7 @@ import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class MarsProperty(
+class NetworkMarsProperty(
         val id: String,
         @Json(name = "img_src") val imgSrc: String,
         val price: Double,
@@ -31,7 +31,7 @@ class MarsProperty(
         get() = type == "rent"
 }
 
-fun List<MarsProperty>.toDbModel(): List<DbMarsProperty> {
+fun List<NetworkMarsProperty>.toDbModel(): List<DbMarsProperty> {
     return map {
         DbMarsProperty(
                 id = it.id,

@@ -3,16 +3,16 @@ package com.example.android.marsrealestate.ui.detail
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.android.marsrealestate.R
-import com.example.android.marsrealestate.data.models.Property
+import com.example.android.marsrealestate.data.models.MarsProperty
 
-class DetailViewModel(property: Property, app: Application) : AndroidViewModel(app) {
+class DetailViewModel(marsProperty: MarsProperty, app: Application) : AndroidViewModel(app) {
 
-    private val _selectedProperty = MutableLiveData<Property>()
-    val selectedProperty: LiveData<Property>
+    private val _selectedProperty = MutableLiveData<MarsProperty>()
+    val selectedMarsProperty: LiveData<MarsProperty>
         get() = _selectedProperty
 
     //move these methods to use strings formattors
-    val displayPropertyType = Transformations.map(selectedProperty) {
+    val displayPropertyType = Transformations.map(selectedMarsProperty) {
         app.applicationContext.getString(R.string.display_type,
                 app.applicationContext.getString(
                         when (it.isRental) {
@@ -22,7 +22,7 @@ class DetailViewModel(property: Property, app: Application) : AndroidViewModel(a
     }
 
     //move these methods to use strings formattors
-    val displayPropertyPrice = Transformations.map(selectedProperty) {
+    val displayPropertyPrice = Transformations.map(selectedMarsProperty) {
         app.applicationContext.getString(
                 when (it.isRental) {
                     true -> R.string.display_price_monthly_rental
@@ -31,6 +31,6 @@ class DetailViewModel(property: Property, app: Application) : AndroidViewModel(a
     }
 
     init {
-        _selectedProperty.value = property
+        _selectedProperty.value = marsProperty
     }
 }

@@ -41,12 +41,11 @@ class OverviewFragment : Fragment() {
     }
 
     private fun setObservers() {
-        overviewViewModel.navigateToSelectedProperty.observe(viewLifecycleOwner, Observer {
+        overviewViewModel.navigateToSelectedMarsProperty.observe(viewLifecycleOwner, Observer {
             if (null != it) {
                 this.findNavController().navigate(
                         OverviewFragmentDirections.actionShowDetail(it))
                 overviewViewModel.displayPropertyDetailsComplete()
-                Toast.makeText(activity, overviewViewModel.properties.value?.value?.size.toString(), Toast.LENGTH_SHORT).show()
             }
         })
     }

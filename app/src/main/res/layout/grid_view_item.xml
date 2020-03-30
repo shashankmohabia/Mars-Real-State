@@ -10,7 +10,7 @@
 
         <variable
             name="property"
-            type="com.example.android.marsrealestate.data.models.Property" />
+            type="com.example.android.marsrealestate.data.models.MarsProperty" />
 
         <variable
             name="clickListener"

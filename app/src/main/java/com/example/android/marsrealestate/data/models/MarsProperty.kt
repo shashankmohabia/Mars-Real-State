@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Property(
+data class MarsProperty(
         val id: String,
         val imgSrc: String,
         val price: Double,

@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.android.marsrealestate.data.database.PropertyDatabase
-import com.example.android.marsrealestate.data.models.Property
+import com.example.android.marsrealestate.data.models.MarsProperty
 import com.example.android.marsrealestate.repository.PropertyRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,16 +21,16 @@ class OverviewViewModel(application: Application) : ViewModel() {
     private val uiScope = CoroutineScope(viewModelJob + Dispatchers.Main)
     private val repository = PropertyRepository(PropertyDatabase.getInstance(application))
 
-    private val _properties = MutableLiveData<LiveData<List<Property>>>()
-    val properties: LiveData<LiveData<List<Property>>>
+    private val _properties = MutableLiveData<LiveData<List<MarsProperty>>>()
+    val properties: LiveData<LiveData<List<MarsProperty>>>
         get() = _properties
 
     private val _status = MutableLiveData<MarsApiStatus>()
     val status: LiveData<MarsApiStatus>
         get() = _status
 
-    private val _navigateToSelectedProperty = MutableLiveData<Property>()
-    val navigateToSelectedProperty: LiveData<Property>
+    private val _navigateToSelectedProperty = MutableLiveData<MarsProperty>()
+    val navigateToSelectedMarsProperty: LiveData<MarsProperty>
         get() = _navigateToSelectedProperty
 
 
@@ -60,8 +60,8 @@ class OverviewViewModel(application: Application) : ViewModel() {
         }
     }
 
-    fun displayPropertyDetails(property: Property) {
-        _navigateToSelectedProperty.value = property
+    fun displayPropertyDetails(marsProperty: MarsProperty) {
+        _navigateToSelectedProperty.value = marsProperty
     }
 
     fun displayPropertyDetailsComplete() {
