@@ -1,6 +1,7 @@
 package com.example.android.marsrealestate.data.work
 
 import android.content.Context
+import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.android.marsrealestate.data.database.PropertyDatabase
@@ -12,6 +13,7 @@ class RefreshDBWorker(private val context: Context, params: WorkerParameters) : 
         val db = PropertyDatabase.getInstance(context)
         val repository = PropertyRepository(db)
         try {
+            Log.i("jaipur", "started")
             repository.refreshDatabase()
         } catch (e: HttpException) {
             return Result.retry()
