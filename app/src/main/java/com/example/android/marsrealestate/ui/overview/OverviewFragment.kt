@@ -41,6 +41,14 @@ class OverviewFragment : Fragment() {
     }
 
     private fun setObservers() {
+        overviewViewModel.properties.observe(viewLifecycleOwner, Observer {
+            if(it == null|| it.value.isNullOrEmpty()){
+                overviewViewModel.updateDataAvailabilityStatus(DataAvailabilityStatus.ERROR)
+            }else{
+                overviewViewModel.updateDataAvailabilityStatus(DataAvailabilityStatus.DONE)
+            }
+        })
+
         overviewViewModel.navigateToSelectedMarsProperty.observe(viewLifecycleOwner, Observer {
             if (null != it) {
                 this.findNavController().navigate(

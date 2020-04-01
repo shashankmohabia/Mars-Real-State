@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.android.marsrealestate.R
 import com.example.android.marsrealestate.data.models.MarsProperty
-import com.example.android.marsrealestate.ui.overview.MarsApiStatus
+import com.example.android.marsrealestate.ui.overview.DataAvailabilityStatus
 import com.example.android.marsrealestate.ui.overview.PhotoGridAdapter
 
 @BindingAdapter("imageurl")
@@ -36,17 +36,17 @@ fun bindRecyclerView(recyclerView: RecyclerView,
 
 @BindingAdapter("marsApiStatus")
 fun bindStatus(statusImageView: ImageView,
-               status: MarsApiStatus?) {
+               status: DataAvailabilityStatus?) {
     when (status) {
-        MarsApiStatus.LOADING -> {
+        DataAvailabilityStatus.LOADING -> {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.loading_animation)
         }
-        MarsApiStatus.ERROR -> {
+        DataAvailabilityStatus.ERROR -> {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.ic_connection_error)
         }
-        MarsApiStatus.DONE -> {
+        DataAvailabilityStatus.DONE -> {
             statusImageView.visibility = View.GONE
         }
     }
